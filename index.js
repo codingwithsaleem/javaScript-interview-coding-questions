@@ -2,7 +2,7 @@
 
 // you want to create a new object that contains only the key-value pairs that are common between two input objects based on their values.
 
-const input1 = {a: 1, b: 2, i: 5, g: 4, h: 5};
+const input1 = {a: 2, b: 2, i: 5, g: 4, h: 5};
 const input2 = {a: 1, b: 2, h: 3, k: 4, h: 6};
 
 // start:
