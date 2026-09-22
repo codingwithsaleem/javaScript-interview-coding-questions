@@ -40,5 +40,54 @@ for(i=0; i<input.length; i++){
 
 console.log(secondLargest);
 
+// question 3
+
+Log in
+Sign up for free
+You said:
+
+/**
+ * Write a function that accepts a URL,
+ * asynchronously sends a GET request to that URL, and returns the response data as JSON.
+ *
+ * Use fetch to retrieve the data.
+ * Only the Promise API may be used.
+ *
+ * If the request fails, retry it up to 5 more times.
+ * If all attempts fail, reject with the error message:
+ * "The specified URL is unavailable".
+ */
+
+function get(url) {
+  const maxAttempts = 6;
+
+  function attempt(count) {
+    return fetch(url)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`HTTP error: ${response.status}`);
+        }
+
+        return response.json();
+      })
+      .catch(error => {
+        if (count < maxAttempts) {
+          return attempt(count + 1);
+        }
+
+        return Promise.reject(
+          new Error("The specified URL is unavailable")
+        );
+      });
+  }
+
+  return attempt(1);
+}
+
+get("https://interview.yandex-team.ru/ping")
+  .then(data => console.log(data))
+  .catch(error => console.error(error.message));
+
+
 
 
